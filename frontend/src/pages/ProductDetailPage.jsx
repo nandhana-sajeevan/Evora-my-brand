@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import api from "../lib/api";
 import { useShop } from "../context/ShopContext";
+import { resolveUrl } from "../components/admin/ImageUploader";
 import { Star, Heart, ShoppingBag, Truck, Shield, ArrowLeft } from "lucide-react";
 
 export default function ProductDetailPage() {
@@ -46,7 +47,7 @@ export default function ProductDetailPage() {
         <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
           <div>
             <div className="aspect-[4/5] overflow-hidden bg-secondary">
-              <img src={product.images?.[activeImg]} alt={product.name} className="w-full h-full object-cover" />
+              <img src={resolveUrl(product.images?.[activeImg])} alt={product.name} className="w-full h-full object-cover" />
             </div>
             {product.images?.length > 1 && (
               <div className="flex gap-3 mt-4">
@@ -56,7 +57,7 @@ export default function ProductDetailPage() {
                     onClick={() => setActiveImg(i)}
                     className={`w-20 h-24 overflow-hidden border ${activeImg === i ? "border-foreground" : "border-transparent opacity-70"}`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={resolveUrl(img)} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>

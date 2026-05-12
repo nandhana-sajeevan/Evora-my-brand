@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent } from "../ui/dialog";
 import { useShop } from "../../context/ShopContext";
+import { resolveUrl } from "../admin/ImageUploader";
 import { Star, Heart, X } from "lucide-react";
 
 export default function QuickViewDialog({ product, open, onOpenChange }) {
@@ -32,7 +33,7 @@ export default function QuickViewDialog({ product, open, onOpenChange }) {
           <div className="bg-secondary">
             <div className="aspect-[4/5] overflow-hidden">
               <img
-                src={product.images?.[activeImg]}
+                src={resolveUrl(product.images?.[activeImg])}
                 alt={product.name}
                 className="w-full h-full object-cover"
               />
@@ -45,7 +46,7 @@ export default function QuickViewDialog({ product, open, onOpenChange }) {
                     onClick={() => setActiveImg(i)}
                     className={`w-16 h-20 overflow-hidden border ${activeImg === i ? "border-foreground" : "border-transparent"}`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <img src={resolveUrl(img)} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>

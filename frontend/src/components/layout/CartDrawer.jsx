@@ -1,11 +1,29 @@
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import { useShop } from "../../context/ShopContext";
-
+import { resolveUrl } from "../admin/ImageUploader";
+import api from "../../lib/api";
+import { toast } from "sonner";
+import { useState } from "react";
 import { Minus, Plus, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function CartDrawer() {
-  const { cartOpen, setCartOpen, cart, updateCartItem, removeCartItem, cartSubtotal } = useShop();
+  const { cartOpen, setCartOpen, cart, updateCartItem, removeCartItem, cartSubtotal, refreshCart } = useShop();
+  const [checking, setChecking] = useState(false);
+
+  const checkout = async () => {
+    setChecking(true);
+    try {
+      await api.post("/orders/checkout", {});
+      await refreshCart();
+      toast("Order placed", { description: "Thank you. We've received your order." });
+      setCartOpen(false);
+    } catch (e) {
+      toast.error("Checkout failed", { description: e.response?.data?.detail || "Please sign in to checkout." });
+    } finally {
+      setChecking(false);
+    }
+  };
 
   return (
     <Sheet open={cartOpen} onOpenChange={setCartOpen}>
@@ -36,7 +54,7 @@ export default function CartDrawer() {
                 <li key={item.id} className="flex gap-4" data-testid={`cart-item-${item.id}`}>
                   <div className="w-24 h-32 bg-secondary overflow-hidden flex-shrink-0">
                     <img
-                      src={item.product?.images?.[0]}
+                      src={resolveUrl(item.product?.images?.[0])}
                       alt={item.product?.name}
                       className="w-full h-full object-cover"
                     />
@@ -95,10 +113,12 @@ export default function CartDrawer() {
             </div>
             <p className="text-xs opacity-50">Shipping & taxes calculated at checkout.</p>
             <button
-              className="w-full bg-foreground text-background py-4 text-eyebrow hover:bg-foreground/90 transition-colors"
+              onClick={checkout}
+              disabled={checking}
+              className="w-full bg-foreground text-background py-4 text-eyebrow hover:bg-foreground/90 transition-colors disabled:opacity-50"
               data-testid="checkout-btn"
             >
-              Checkout
+              {checking ? "Placing order..." : "Place Order"}
             </button>
           </div>
         )}

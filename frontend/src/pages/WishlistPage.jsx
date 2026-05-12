@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useShop } from "../context/ShopContext";
 import { useAuth } from "../context/AuthContext";
+import { resolveUrl } from "../components/admin/ImageUploader";
 import { Heart, X, ShoppingBag } from "lucide-react";
 
 export default function WishlistPage() {
@@ -36,7 +37,7 @@ export default function WishlistPage() {
             <article key={w.id} data-testid={`wishlist-item-${w.id}`} className="group">
               <div className="relative aspect-[3/4] bg-secondary overflow-hidden">
                 <Link to={`/product/${w.product_id}`}>
-                  <img src={w.product?.images?.[0]} alt={w.product?.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <img src={resolveUrl(w.product?.images?.[0])} alt={w.product?.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 </Link>
                 <button
                   onClick={() => toggleWishlist(w.product_id)}

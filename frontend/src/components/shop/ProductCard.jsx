@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Heart, Eye, ShoppingBag, Star } from "lucide-react";
 import { useShop } from "../../context/ShopContext";
+import { resolveUrl } from "../admin/ImageUploader";
 import { motion } from "framer-motion";
 
 export default function ProductCard({ product, onQuickView, index = 0 }) {
@@ -22,14 +23,14 @@ export default function ProductCard({ product, onQuickView, index = 0 }) {
     >
       <Link to={`/product/${product.id}`} className="block overflow-hidden aspect-[3/4] bg-secondary relative">
         <img
-          src={product.images?.[0]}
+          src={resolveUrl(product.images?.[0])}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
           loading="lazy"
         />
         {product.images?.[1] && (
           <img
-            src={product.images[1]}
+            src={resolveUrl(product.images[1])}
             alt=""
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
               hovered ? "opacity-100" : "opacity-0"

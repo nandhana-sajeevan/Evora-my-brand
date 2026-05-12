@@ -134,7 +134,16 @@ export default function Navbar() {
             )}
           </button>
           {user && typeof user === "object" ? (
-            <div className="hidden md:flex items-center gap-2 pl-2">
+            <div className="hidden md:flex items-center gap-3 pl-2">
+              {user.role === "admin" && (
+                <Link
+                  data-testid="admin-link"
+                  to="/admin"
+                  className="text-eyebrow border border-foreground px-3 py-1 hover:bg-foreground hover:text-background transition-colors"
+                >
+                  Admin
+                </Link>
+              )}
               <span className="text-eyebrow opacity-70" data-testid="user-name">{user.name?.split(" ")[0]}</span>
               <button
                 data-testid="logout-btn"

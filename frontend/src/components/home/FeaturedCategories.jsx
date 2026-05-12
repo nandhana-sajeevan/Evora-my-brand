@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import api from "../../lib/api";
+import { resolveUrl } from "../admin/ImageUploader";
 
 export default function FeaturedCategories() {
   const [cats, setCats] = useState([]);
@@ -40,7 +41,7 @@ export default function FeaturedCategories() {
             >
               <div className="aspect-[3/4] overflow-hidden bg-secondary">
                 <img
-                  src={c.image}
+                  src={resolveUrl(c.image)}
                   alt={c.name}
                   className="w-full h-full object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
                   loading="lazy"

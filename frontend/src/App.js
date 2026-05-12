@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import { Toaster } from "sonner";
 
@@ -21,8 +21,20 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AboutPage from "./pages/AboutPage";
 
+import AdminRoute from "./components/admin/AdminRoute";
+import AdminLayout from "./components/admin/AdminLayout";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProducts from "./pages/admin/AdminProducts";
+import AdminCategories from "./pages/admin/AdminCategories";
+import AdminBanners from "./pages/admin/AdminBanners";
+import AdminOrders from "./pages/admin/AdminOrders";
+import AdminUsers from "./pages/admin/AdminUsers";
+
 function SmoothScroll({ children }) {
+  const location = useLocation();
   useEffect(() => {
+    // Disable Lenis on admin routes (sticky sidebar conflicts with smooth scroll)
+    if (location.pathname.startsWith("/admin")) return;
     const lenis = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -37,26 +49,46 @@ function SmoothScroll({ children }) {
       cancelAnimationFrame(id);
       lenis.destroy();
     };
-  }, []);
+  }, [location.pathname]);
   return children;
+}
+
+function PublicShell({ children }) {
+  return (
+    <>
+      <Navbar />
+      <CartDrawer />
+      {children}
+      <Footer />
+    </>
+  );
 }
 
 function Shell() {
   return (
     <div className="App relative">
-      <Navbar />
-      <CartDrawer />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/product/:id" element={<ProductDetailPage />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="*" element={<HomePage />} />
+        {/* Admin */}
+        <Route path="/admin" element={<AdminRoute><AdminLayout /></AdminRoute>}>
+          <Route index element={<AdminDashboard />} />
+          <Route path="products" element={<AdminProducts />} />
+          <Route path="categories" element={<AdminCategories />} />
+          <Route path="banners" element={<AdminBanners />} />
+          <Route path="orders" element={<AdminOrders />} />
+          <Route path="users" element={<AdminUsers />} />
+        </Route>
+
+        {/* Public */}
+        <Route path="/" element={<PublicShell><HomePage /></PublicShell>} />
+        <Route path="/shop" element={<PublicShell><ShopPage /></PublicShell>} />
+        <Route path="/product/:id" element={<PublicShell><ProductDetailPage /></PublicShell>} />
+        <Route path="/wishlist" element={<PublicShell><WishlistPage /></PublicShell>} />
+        <Route path="/about" element={<PublicShell><AboutPage /></PublicShell>} />
+        <Route path="/login" element={<PublicShell><LoginPage /></PublicShell>} />
+        <Route path="/register" element={<PublicShell><RegisterPage /></PublicShell>} />
+        <Route path="*" element={<PublicShell><HomePage /></PublicShell>} />
       </Routes>
-      <Footer />
+
       <Toaster
         position="bottom-right"
         toastOptions={{
