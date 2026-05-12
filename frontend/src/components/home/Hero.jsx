@@ -7,7 +7,7 @@ export default function Hero() {
     <section data-testid="hero" className="relative h-screen min-h-[640px] w-full overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://images.pexels.com/photos/10461830/pexels-photo-10461830.jpeg"
+          src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=80"
           alt="ÉVORA editorial"
           className="w-full h-full object-cover"
         />

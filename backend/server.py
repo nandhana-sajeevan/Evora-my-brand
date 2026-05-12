@@ -411,8 +411,8 @@ SEED_PRODUCTS = [
         "category": "Hoodies",
         "description": "Brushed loop-back fleece with extended hood and tonal embroidery. A modern classic, refined for the season.",
         "images": [
-            "https://images.unsplash.com/photo-1618924250113-e162305ac8cd",
-            "https://images.unsplash.com/photo-1698180432214-158a26ddb62b",
+            "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1200&q=80",
+            "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1200&q=80",
         ],
         "sizes": ["S", "M", "L", "XL"],
         "colors": ["Onyx", "Sand"],
