@@ -1,0 +1,119 @@
+{
+  "theme": {
+    "primary_archetype": "Archetype 5: Jewel & Luxury (adapted for Light mode base with Dark Mode toggle)",
+    "aesthetic": "High-end streetwear, editorial minimalism, quiet luxury",
+    "emotions": ["Premium", "Timeless", "Elevated", "Confident"]
+  },
+  "colors": {
+    "light": {
+      "background": "#FAF9F6",
+      "foreground": "#0A0A0A",
+      "primary": "#0A0A0A",
+      "primary_foreground": "#FAF9F6",
+      "secondary": "#EBE6DF",
+      "secondary_foreground": "#0A0A0A",
+      "accent": "#D5CABD",
+      "accent_foreground": "#0A0A0A",
+      "muted": "#F2EFEB",
+      "muted_foreground": "#6B6A68",
+      "border": "#E2DDD7"
+    },
+    "dark": {
+      "background": "#0A0A0A",
+      "foreground": "#FAF9F6",
+      "primary": "#FAF9F6",
+      "primary_foreground": "#0A0A0A",
+      "secondary": "#1A1A1A",
+      "secondary_foreground": "#FAF9F6",
+      "accent": "#2B2A28",
+      "accent_foreground": "#FAF9F6",
+      "muted": "#1F1F1F",
+      "muted_foreground": "#A3A09B",
+      "border": "#2A2A2A"
+    }
+  },
+  "typography": {
+    "font_families": {
+      "headings": "Cormorant Garamond",
+      "body": "Outfit",
+      "accent": "Cabinet Grotesk"
+    },
+    "scales": {
+      "h1": "text-5xl sm:text-6xl md:text-7xl font-light tracking-tighter leading-none",
+      "h2": "text-3xl sm:text-4xl md:text-5xl font-light tracking-tight",
+      "h3": "text-2xl sm:text-3xl font-normal",
+      "body": "text-base leading-relaxed tracking-wide",
+      "small": "text-xs uppercase tracking-[0.2em]"
+    }
+  },
+  "spacing_and_layout": {
+    "container_padding": "px-6 md:px-12 lg:px-24",
+    "section_spacing": "py-24 md:py-32",
+    "grid_patterns": {
+      "products": "grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12",
+      "bento_promo": "grid-cols-1 md:grid-cols-12 gap-6"
+    }
+  },
+  "components": {
+    "navbar": {
+      "style": "Glassmorphism, backdrop-blur-2xl, border-b border-border/40",
+      "behavior": "Sticky top, z-50",
+      "links": ["Shop", "Collections", "About", "Journal"]
+    },
+    "hero": {
+      "layout": "Fullscreen (h-screen) with absolute background image",
+      "overlay": "bg-black/30 or gradient-to-t from-black/60 to-transparent",
+      "typography_alignment": "Bottom-left or Centered"
+    },
+    "product_card": {
+      "style": "Flat, cardless, aspect-[3/4] image container, no visible borders until hover",
+      "hover_effect": "Image scale 105% duration-700 ease-out, reveal Quick Add button",
+      "typography": "Left aligned, price and title in Outfit font"
+    },
+    "buttons": {
+      "primary": "rounded-none bg-primary text-primary-foreground px-8 py-4 uppercase text-xs tracking-widest hover:bg-primary/90 transition-all",
+      "secondary": "rounded-none border border-border bg-transparent hover:bg-secondary transition-all"
+    }
+  },
+  "motion_and_interactions": {
+    "global": "Lenis smooth scrolling (mandatory for premium feel)",
+    "page_load": "Framer Motion staggered fade-up for hero elements",
+    "hover_states": "Soft, 0.4s ease-out transitions",
+    "drawer": "Right-side slide-in for Cart and Mobile Menu"
+  },
+  "media": {
+    "hero_banner": "https://images.pexels.com/photos/10461830/pexels-photo-10461830.jpeg",
+    "promo_banner": "https://images.unsplash.com/photo-1649624963958-554d32e28c55",
+    "about_brand": "https://images.unsplash.com/photo-1649624964799-609681c92d1b",
+    "categories": [
+      {
+        "name": "Hoodies",
+        "url": "https://images.unsplash.com/photo-1618924250113-e162305ac8cd"
+      },
+      {
+        "name": "Jackets",
+        "url": "https://images.unsplash.com/photo-1615545362149-85299994b09b"
+      },
+      {
+        "name": "Streetwear",
+        "url": "https://images.pexels.com/photos/25745247/pexels-photo-25745247.jpeg"
+      }
+    ],
+    "products": [
+      "https://images.unsplash.com/photo-1642400997435-f4b7c0f68ce9",
+      "https://images.unsplash.com/photo-1643387848945-da63360662f4",
+      "https://images.unsplash.com/photo-1698180432214-158a26ddb62b",
+      "https://images.unsplash.com/photo-1628065124175-32d9e33b898b"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Install and use 'lenis' for momentum smooth scrolling to establish a premium feel.",
+    "Use 'framer-motion' for staggered fade-in animations on sections and hero.",
+    "Implement a dark/light mode toggle that updates root CSS variables based on the provided colors.",
+    "Use 'lucide-react' icons with stroke-width 1.5 for minimalist UI icons (cart, search, wishlist).",
+    "Ensure all product images maintain a consistent 3:4 aspect ratio using object-cover.",
+    "CRITICAL: All interactive and key informational elements MUST include a data-testid attribute for robust automated testing (e.g., data-testid='wishlist-button').",
+    "Do NOT use thick borders or heavy shadows. Rely on generous padding, typography scaling, and negative space for hierarchy.",
+    "Always use the exact image URLs provided in the media object; DO NOT use placeholders like via.placeholder.com."
+  ]
+}
